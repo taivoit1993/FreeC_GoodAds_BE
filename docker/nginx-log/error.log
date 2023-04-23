@@ -1,0 +1,28 @@
+2023/04/22 02:59:09 [notice] 32#32: using the "epoll" event method
+2023/04/22 02:59:09 [notice] 32#32: nginx/1.21.6
+2023/04/22 02:59:09 [notice] 32#32: built by gcc 10.2.1 20210110 (Debian 10.2.1-6) 
+2023/04/22 02:59:09 [notice] 32#32: OS: Linux 5.15.49-linuxkit
+2023/04/22 02:59:09 [notice] 32#32: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/04/22 02:59:09 [notice] 32#32: start worker processes
+2023/04/22 02:59:09 [notice] 32#32: start worker process 37
+2023/04/22 02:59:09 [notice] 32#32: start worker process 39
+2023/04/22 02:59:09 [notice] 32#32: start worker process 40
+2023/04/22 02:59:09 [notice] 32#32: start worker process 41
+2023/04/22 02:59:09 [emerg] 37#37: io_setup() failed (38: Function not implemented)
+2023/04/22 02:59:09 [emerg] 41#41: io_setup() failed (38: Function not implemented)
+2023/04/22 02:59:09 [emerg] 40#40: io_setup() failed (38: Function not implemented)
+2023/04/22 02:59:09 [emerg] 39#39: io_setup() failed (38: Function not implemented)
+2023/04/23 14:17:07 [notice] 32#32: using the "epoll" event method
+2023/04/23 14:17:07 [notice] 32#32: nginx/1.21.6
+2023/04/23 14:17:07 [notice] 32#32: built by gcc 10.2.1 20210110 (Debian 10.2.1-6) 
+2023/04/23 14:17:07 [notice] 32#32: OS: Linux 5.15.49-linuxkit
+2023/04/23 14:17:07 [notice] 32#32: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/04/23 14:17:07 [notice] 32#32: start worker processes
+2023/04/23 14:17:07 [notice] 32#32: start worker process 37
+2023/04/23 14:17:07 [notice] 32#32: start worker process 39
+2023/04/23 14:17:07 [notice] 32#32: start worker process 40
+2023/04/23 14:17:07 [notice] 32#32: start worker process 43
+2023/04/23 14:17:07 [emerg] 40#40: io_setup() failed (38: Function not implemented)
+2023/04/23 14:17:07 [emerg] 43#43: io_setup() failed (38: Function not implemented)
+2023/04/23 14:17:07 [emerg] 37#37: io_setup() failed (38: Function not implemented)
+2023/04/23 14:17:07 [emerg] 39#39: io_setup() failed (38: Function not implemented)

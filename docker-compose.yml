@@ -1,0 +1,31 @@
+version: '3.7'
+services:
+  nginx:
+    build: ./docker
+    container_name: server_container
+    working_dir: '/var/www/html'
+    ports:
+      - 9000:80
+    networks:
+      - laravel-network
+    volumes:
+      - ./src/:/var/www/html
+      - ./docker/nginx-log:/var/log/nginx
+      - ./docker/php-fpm/php-fpm.log:/var/log/php-fpm.log
+      - ./docker/config/app.conf:/etc/nginx/conf.d/app.conf
+  mysql:
+    platform: linux/amd64
+    image: mysql:5.7
+    container_name: database
+    ports:
+      - "3308:3306"
+    networks:
+      - laravel-network
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+
+networks:
+  laravel-network:
+    driver: bridge
