@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CampaignController;
+use App\Http\Controllers\AccountController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,4 +28,8 @@ Route::prefix('auth/google')->group(function(){
 
 Route::resource('customer',CustomerController::class);
 
-Route::get('account/{customerId}',[\App\Http\Controllers\AccountController::class,'listingAccount']);
+Route::get('account/{customerId}',[AccountController::class,'listingAccount']);
+
+Route::post('campaign',[CampaignController::class,"store"]);
+
+Route::get('campaign',[CampaignController::class,"index"]);

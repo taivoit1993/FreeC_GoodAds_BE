@@ -28,8 +28,8 @@ class CustomerController extends Controller
             $customer = CustomerServiceClient::parseName($customerResourceName)['customer_id'];
             $accessibleCustomerIds[] = intval($customer);
         }
-//        $test = $this->createCustomerClientToHierarchy(7049183756);
-
+        $test = $this->createCustomerClientToHierarchy(7049183756);
+        return $test;
         return $accessibleCustomerIds;
     }
 
@@ -147,8 +147,28 @@ class CustomerController extends Controller
                 }
             }
         }
+        dd($customerIdsToChildAccounts);
 
         return is_null($rootCustomerClient) ? null
             : [$rootCustomerClient->getId() => $customerIdsToChildAccounts];
+    }
+
+    public function createAccount(int $managerCustomerId){
+        $customer = new Customer([
+            'descriptive_name' => 'Account created with CustomerService on ' . date('Ymd h:i:s'),
+            // For a list of valid currency codes and time zones see this documentation:
+            // https://developers.google.com/google-ads/api/reference/data/codes-formats.
+            'currency_code' => 'USD',
+            'time_zone' => 'America/New_York',
+            // The below values are optional. For more information about URL
+            // options see: https://support.google.com/google-ads/answer/6305348.
+            'tracking_url_template' => '{lpurl}?device={device}',
+            'final_url_suffix' => 'keyword={keyword}&matchtype={matchtype}&adgroupid={adgroupid}'
+        ]);
+
+        // Issues a mutate request to create an account
+        $customerServiceClient = $this->googleAdsClient->getCustomerServiceClient();
+        $response = $customerServiceClient->createCustomerClient($managerCustomerId, $customer);
+        return $response;
     }
 }
