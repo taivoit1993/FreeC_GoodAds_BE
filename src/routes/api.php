@@ -30,6 +30,8 @@ Route::resource('customer',CustomerController::class);
 
 Route::get('account/{customerId}',[AccountController::class,'listingAccount']);
 
-Route::post('campaign',[CampaignController::class,"store"]);
+//Route::post('campaign',[CampaignController::class,"store"]);
+//
+//Route::get('campaign',[CampaignController::class,"index"]);
 
-Route::get('campaign',[CampaignController::class,"index"]);
+Route::resource('campaign',CampaignController::class);

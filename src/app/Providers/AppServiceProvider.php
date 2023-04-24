@@ -19,7 +19,6 @@ class AppServiceProvider extends ServiceProvider
             // Constructs a Google Ads API client configured from the properties file.
             return (new GoogleAdsClientBuilder())
                 ->fromFile(config('app.google_ads_php_path'))
-
                 ->withOAuth2Credential((new OAuth2TokenBuilder())
                     ->fromFile(config('app.google_ads_php_path'))
                     ->build())

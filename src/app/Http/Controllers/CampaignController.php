@@ -13,7 +13,7 @@ class CampaignController extends Controller
     public function index()
     {
         //
-        return app(CampaignService::class)->listingCapaign($this->googleAdsClient,"9513370025");
+        return app(CampaignService::class)->listingCampaign($this->googleAdsClient,"9513370025");
     }
 
     /**
@@ -47,6 +47,7 @@ class CampaignController extends Controller
     public function show(string $id)
     {
         //
+        return app(CampaignService::class)->getDetailCampaign($this->googleAdsClient,"9513370025",$id);
     }
 
     /**
@@ -55,6 +56,8 @@ class CampaignController extends Controller
     public function edit(string $id)
     {
         //
+
+
     }
 
     /**
@@ -63,6 +66,8 @@ class CampaignController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        app(CampaignService::class)->updateCampaign($this->googleAdsClient,"9513370025",$id);
+        return response()->json(["message"=>"update success"]);
     }
 
     /**
@@ -71,5 +76,7 @@ class CampaignController extends Controller
     public function destroy(string $id)
     {
         //
+        app(CampaignService::class)->removeCampaign($this->googleAdsClient,"9513370025",$id);
+        return response()->json(["message"=>"delete success"]);
     }
 }
