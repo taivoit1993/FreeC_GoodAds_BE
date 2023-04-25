@@ -11,10 +11,11 @@ class CampaignController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $campaign = app(CampaignService::class)->listingCampaign($this->googleAdsClient,"9513370025");
+//        return $request->route("googleAdsClient");
+        $campaign = app(CampaignService::class)->listingCampaign($request->route("googleAdsClient"),"9513370025");
 //        return $campaign;
         return new CampaignResource($campaign);
     }
