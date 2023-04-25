@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CampaignResource;
 use App\Service\CampaignService;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,9 @@ class CampaignController extends Controller
     public function index()
     {
         //
-        return app(CampaignService::class)->listingCampaign($this->googleAdsClient,"9513370025");
+        $campaign = app(CampaignService::class)->listingCampaign($this->googleAdsClient,"9513370025");
+//        return $campaign;
+        return new CampaignResource($campaign);
     }
 
     /**

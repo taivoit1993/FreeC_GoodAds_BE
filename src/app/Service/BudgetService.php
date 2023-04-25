@@ -45,6 +45,5 @@ class BudgetService{
         } catch (ApiException $apiException) {
             throw new \Exception($apiException->getMessage());
         }
-
     }
 }

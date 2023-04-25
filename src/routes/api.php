@@ -6,6 +6,8 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdsGroupController;
+use App\Http\Controllers\AdsController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,8 +32,8 @@ Route::resource('customer',CustomerController::class);
 
 Route::get('account/{customerId}',[AccountController::class,'listingAccount']);
 
-//Route::post('campaign',[CampaignController::class,"store"]);
-//
-//Route::get('campaign',[CampaignController::class,"index"]);
-
 Route::resource('campaign',CampaignController::class);
+
+Route::resource('ads-group',AdsGroupController::class);
+
+Route::resource('ads',AdsController::class);

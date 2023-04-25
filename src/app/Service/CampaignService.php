@@ -90,6 +90,7 @@ class CampaignService
             $stream =
                 $googleAdsServiceClient->searchStream($customerId, $query);
 
+
             $response = [];
             foreach ($stream->iterateAllElements() as $googleAdsRow) {
                 $response[] = [
