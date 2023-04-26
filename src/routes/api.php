@@ -19,6 +19,7 @@ use App\Http\Controllers\AdsController;
 |
 */
 require_once base_path()."/app/Containers/GoogleAuthentication/route.php";
+require_once base_path()."/app/Containers/Campaigns/route.php";
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -34,7 +35,7 @@ Route::resource('customer',CustomerController::class);
 
 Route::get('account/{customerId}',[AccountController::class,'listingAccount']);
 
-Route::resource('campaign',CampaignController::class)->middleware(['google.ads.auth']);
+//Route::resource('campaign',CampaignController::class)->middleware(['google.ads.auth']);
 
 Route::resource('ads-group',AdsGroupController::class);
 

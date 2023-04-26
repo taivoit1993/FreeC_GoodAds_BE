@@ -171,7 +171,9 @@ class CampaignService
      */
     public function updateCampaign(GoogleAdsClient $googleAdsClient,
                                    int             $customerId,
-                                   int             $campaignId)
+                                   int             $campaignId,
+                                    string $status,
+                                    string $campaignName)
     {
         // Creates a campaign object with the specified resource name and other changes.
         $campaign = new Campaign([
