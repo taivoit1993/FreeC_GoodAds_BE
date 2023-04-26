@@ -66,7 +66,6 @@ class AdsGroupService
      */
     public function listingAdsGroup(GoogleAdsClient $googleAdsClient,
                                     int             $customerId,
-                                    int             $pageSize,
                                     ?int            $campaignId)
     {
         try {
@@ -79,15 +78,15 @@ class AdsGroupService
 
             // Issues a search request by specifying page size.
             $response =
-                $googleAdsServiceClient->search($customerId, $query, ['pageSize' => $pageSize]);
+                $googleAdsServiceClient->search($customerId, $query);
             $data = [];
             foreach ($response->iterateAllElements() as $googleAdsRow) {
                 $data [] = [
                     "id" => $googleAdsRow->getAdGroup()->getId(),
                     "name" => $googleAdsRow->getAdGroup()->getName(),
-                    'cpcBidMicros' => $googleAdsRow->getAdGroup()->getCpcBidMicros(),
+                    'cpc_bid_micros' => $googleAdsRow->getAdGroup()->getCpcBidMicros(),
                     'status' => AdGroupStatus::name($googleAdsRow->getAdGroup()->getStatus()),
-                    "campaignId" => $googleAdsRow->getCampaign()->getId()
+                    "campaign_id" => $googleAdsRow->getCampaign()->getId()
                 ];
             }
             return $data;

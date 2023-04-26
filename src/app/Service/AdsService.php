@@ -80,42 +80,35 @@ class AdsService
 //        if ($campaignId !== null) {
 //            $query .= " WHERE campaign.id = $campaignId";
 //        }
-
             // Issues a search request by specifying page size.
             $response =
-                $googleAdsServiceClient->search($customerId, $query, ['pageSize' => 10]);
+                $googleAdsServiceClient->search($customerId, $query);
             $data = [];
             foreach ($response->iterateAllElements() as $googleAdsRow) {
-//                dd($googleAdsRow->getAdGroupAd()
-//                    ->getAd()->getResponsiveSearchAd()->getHeadLines()->count());
                 $headLines = $googleAdsRow->getAdGroupAd()
                     ->getAd()->getResponsiveSearchAd()->getHeadLines();
+                $hl = [];
                 foreach ($headLines->getIterator() as $headLine){
-                    dd($headLine->getText());
+                    $hl [] = $headLine->getText();
+                }
+
+                $descriptions = $googleAdsRow->getAdGroupAd()
+                        ->getAd()->getResponsiveSearchAd()->getDescriptions();
+                $ds = [];
+                foreach ($descriptions->getIterator() as $description){
+                    $ds [] = $description->getText();
                 }
                 $data [] = [
                     "id" => $googleAdsRow->getAdGroupAd()->getAd()->getId(),
                     "name" => $googleAdsRow->getAdGroupAd()->getAd()->getName(),
-                    'headlines' => $googleAdsRow->getAdGroupAd()
-                        ->getAd()->getResponsiveSearchAd()->getHeadlines(),
-                    'descriptions' => $googleAdsRow->getAdGroupAd()
-                        ->getAd()->getResponsiveSearchAd()->getDescriptions(),
+                    'headlines' => $hl,
+                    'descriptions' => $ds,
                     "finalUrls" => $googleAdsRow->getAdGroupAd()->getAd()
                         ->getFinalUrls()
                 ];
             }
             return $data;
         } catch (GoogleAdsException $googleAdsException) {
-
-//            foreach ($googleAdsException->getGoogleAdsFailure()->getErrors() as $error) {
-//                throw new Exception( $error->getMessage());
-//                printf(
-//                    "\t%s: %s%s",
-//                    $error->getErrorCode()->getErrorCode(),
-//                    $error->getMessage(),
-//                    PHP_EOL
-//                );
-//            }
         }
     }
 }

@@ -13,7 +13,7 @@ class ListingCampaignAction
     {
         try {
             return app(ListingCampaignTask::class)
-                ->run($request->route("googleAdsClient"),env("ACCOUNT_ID"),1,5);
+                ->run($request->route("googleAdsClient"),env("ACCOUNT_ID"));
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
