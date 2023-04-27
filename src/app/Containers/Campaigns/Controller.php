@@ -1,24 +1,23 @@
 <?php
-
-namespace App\Http\Controllers;
-
+namespace App\Containers\Campaigns;
+use App\Containers\Campaigns\Actions\CreateCampaignAction;
+use App\Containers\Campaigns\Actions\DeleteCampaignAction;
+use App\Containers\Campaigns\Actions\FindCampaignByIdAction;
+use App\Containers\Campaigns\Actions\ListingCampaignAction;
 use App\Http\Resources\CampaignResource;
 use App\Service\CampaignService;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller as BaseController;
 
-class CampaignController extends Controller
-{
+class Controller extends BaseController{
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
         //
-//        return $request->route("googleAdsClient");
-        $campaign = app(CampaignService::class)
-            ->listingCampaign($request->route("googleAdsClient"),"9513370025");
-//        return $campaign;
-        return new CampaignResource($campaign);
+        $campaigns = app(ListingCampaignAction::class)->run($request);
+        return new CampaignResource($campaigns);
     }
 
     /**
@@ -36,23 +35,17 @@ class CampaignController extends Controller
     public function store(Request $request)
     {
         //
-        return app(CampaignService::class)->createCampaign($this->googleAdsClient,
-            $request->customer_id,
-            $request->amount_micros,
-            $request->campaign_name,
-            $request->target_google_search,
-            $request->target_search_network,
-            $request->target_content_network,
-            $request->target_partner_search_network);
+        return app(CreateCampaignAction::class)->run($request);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
         //
-        return app(CampaignService::class)->getDetailCampaign($this->googleAdsClient,"9513370025",$id);
+        $campaign = app(FindCampaignByIdAction::class)->run($request,$id);
+        return new CampaignResource($campaign);
     }
 
     /**
@@ -78,10 +71,12 @@ class CampaignController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         //
-        app(CampaignService::class)->removeCampaign($this->googleAdsClient,"9513370025",$id);
-        return response()->json(["message"=>"delete success"]);
+        app(DeleteCampaignAction::class)->run($request, $id);
+        return response()->noContent();
+//        app(CampaignService::class)->removeCampaign($this->googleAdsClient,"9513370025",$id);
+//        return response()->json(["message"=>"delete success"]);
     }
 }
