@@ -14,7 +14,9 @@ class CreateCampaignAction
             $googleAdsClient = $request->route("googleAdsClient") ?? null;
             $customerId = env("ACCOUNT_ID", "");
             $amountMicros = $request->amount_micros ?? 0;
-            $campaignName = $request->campaign_name ?? null;
+            $campaignName = $request->name ?? null;
+            $start_date = $request->start_date ?? null;
+            $end_date = $request->end_date ?? null;
             $targetGoogleSearch = $request->target_google_search ?? false;
             $targetSearchNetwork = $request->target_search_network ?? false;
             $targetContentNetwork = $request->target_content_network ?? false;
