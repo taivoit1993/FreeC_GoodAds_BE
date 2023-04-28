@@ -30,31 +30,31 @@ class CreateCampaignTask
                         int             $customerId,
                         int             $amountMicros,
                         string          $campaignName,
-                        bool            $targetGoogleSearch,
-                        bool            $targetSearchNetwork,
-                        bool            $targetContentNetwork,
-                        bool            $targetPartnerSearchNetwork)
+                        string          $status,
+                        string          $startDate,
+                        string          $endDate,
+    )
     {
         try {
             $budgetResourceName = app(CreateBudgetTask::class)
                 ->run($googleAdsClient, $customerId, $amountMicros);
 
             $networkSettings = new NetworkSettings([
-                'target_google_search' => $targetGoogleSearch,
-                'target_search_network' => $targetSearchNetwork,
-                'target_content_network' => $targetContentNetwork,
-                'target_partner_search_network' => $targetPartnerSearchNetwork
+                'target_google_search' => true,
+                'target_search_network' => true,
+                'target_content_network' => true,
+                'target_partner_search_network' => false
             ]);
 
             $campaign = new Campaign([
                 'name' => $campaignName,
                 'advertising_channel_type' => AdvertisingChannelType::SEARCH,
-                'status' => CampaignStatus::PAUSED,
+                'status' => $status,
                 'manual_cpc' => new ManualCpc(),
                 'campaign_budget' => $budgetResourceName,
                 'network_settings' => $networkSettings,
-                'start_date' => date('Ymd', strtotime('+1 day')),
-                'end_date' => date('Ymd', strtotime('+1 month'))
+                'start_date' => $startDate,
+                'end_date' => $endDate
             ]);
 
             // Creates a campaign operation.

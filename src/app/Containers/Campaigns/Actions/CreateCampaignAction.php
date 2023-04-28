@@ -3,7 +3,9 @@
 namespace App\Containers\Campaigns\Actions;
 
 use App\Containers\Campaigns\Tasks\CreateCampaignTask;
+use Carbon\Carbon;
 use Exception;
+use Google\Ads\GoogleAds\V13\Enums\CampaignStatusEnum\CampaignStatus;
 use Illuminate\Http\Request;
 
 class CreateCampaignAction
@@ -15,21 +17,17 @@ class CreateCampaignAction
             $customerId = env("ACCOUNT_ID", "");
             $amountMicros = $request->amount_micros ?? 0;
             $campaignName = $request->name ?? null;
-            $start_date = $request->start_date ?? null;
-            $end_date = $request->end_date ?? null;
-            $targetGoogleSearch = $request->target_google_search ?? false;
-            $targetSearchNetwork = $request->target_search_network ?? false;
-            $targetContentNetwork = $request->target_content_network ?? false;
-            $targetPartnerSearchNetwork = $request->target_partner_search_network ?? false;
+            $status = $request->status ?? CampaignStatus::PAUSED;
+            $startDate = $request->start_date ? Carbon::parse($request->start_date)->format("Ymd") : Carbon::now()->format("Ymd");
+            $endDate = $request->end_date ? Carbon::parse($request->end_date)->format("Ymd") : Carbon::now()->format("Ymd");
             return app(CreateCampaignTask::class)
                 ->run($googleAdsClient,
                     $customerId,
                     $amountMicros,
                     $campaignName,
-                    $targetGoogleSearch,
-                    $targetSearchNetwork,
-                    $targetContentNetwork,
-                    $targetPartnerSearchNetwork);
+                    $status,
+                    $startDate,
+                    $endDate);
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }

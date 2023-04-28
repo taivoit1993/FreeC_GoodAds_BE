@@ -4,6 +4,7 @@ use App\Containers\Campaigns\Actions\CreateCampaignAction;
 use App\Containers\Campaigns\Actions\DeleteCampaignAction;
 use App\Containers\Campaigns\Actions\FindCampaignByIdAction;
 use App\Containers\Campaigns\Actions\ListingCampaignAction;
+use App\Containers\Campaigns\Actions\UpdateCampaignAction;
 use App\Http\Resources\CampaignResource;
 use App\Service\CampaignService;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ class Controller extends BaseController{
     public function index(Request $request)
     {
         //
+
         $campaigns = app(ListingCampaignAction::class)->run($request);
         return new CampaignResource($campaigns);
     }
@@ -64,8 +66,7 @@ class Controller extends BaseController{
     public function update(Request $request, string $id)
     {
         //
-        app(CampaignService::class)->updateCampaign($this->googleAdsClient,"9513370025",$id);
-        return response()->json(["message"=>"update success"]);
+        return app(UpdateCampaignAction::class)->run($request,$id);
     }
 
     /**

@@ -10,8 +10,7 @@ class ListingAdAction
 {
     public function run(Request $request)
     {
-        $campaignId = $request->campaign_id ?? null;
         return app(ListingAdTask::class)
-            ->run($request->route("googleAdsClient"), env("ACCOUNT_ID"), $campaignId);
+            ->run($request->route("googleAdsClient"), env("ACCOUNT_ID"));
     }
 }

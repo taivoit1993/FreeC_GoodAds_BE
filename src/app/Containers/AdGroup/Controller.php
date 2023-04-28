@@ -2,7 +2,11 @@
 
 namespace App\Containers\AdGroup;
 
+use App\Containers\AdGroup\Actions\CreateAddGroupAction;
+use App\Containers\AdGroup\Actions\DeleteAddGroupAction;
+use App\Containers\AdGroup\Actions\FindAddGroupByIdAction;
 use App\Containers\AdGroup\Actions\ListingAdGroupAction;
+use App\Containers\AdGroup\Actions\UpdateAddGroupAction;
 use App\Http\Resources\AdGroupResource;
 use App\Service\AdsGroupService;
 use Illuminate\Http\Request;
@@ -35,16 +39,17 @@ class Controller extends BaseController
     public function store(Request $request)
     {
         //
-        return app(AdsGroupService::class)
-            ->createAdsGroup($this->googleAdsClient, "9513370025", "20029051604");
+        return app(CreateAddGroupAction::class)->run($request);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
         //
+        $adGroup = app(FindAddGroupByIdAction::class)->run($request,$id);
+        return new AdGroupResource($adGroup);
     }
 
     /**
@@ -61,18 +66,16 @@ class Controller extends BaseController
     public function update(Request $request, string $id)
     {
         //
-        return app(AdsGroupService::class)
-            ->updateAdsGroup($this->googleAdsClient, "9513370025", $id, 500000);
+        return app(UpdateAddGroupAction::class)->run($request, $id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request,string $id)
     {
         //
-        app(AdsGroupService::class)
-            ->removeAdGroup($this->googleAdsClient, "9513370025", $id);
+        app(DeleteAddGroupAction::class)->run($request,$id);
         return response()->noContent();
     }
 }

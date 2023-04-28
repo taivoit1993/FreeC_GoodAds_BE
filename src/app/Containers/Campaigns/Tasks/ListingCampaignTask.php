@@ -4,6 +4,7 @@ namespace App\Containers\Campaigns\Tasks;
 
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsClient;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsException;
+use Google\Ads\GoogleAds\V13\Enums\CampaignStatusEnum;
 use Google\Ads\GoogleAds\V13\Enums\CampaignStatusEnum\CampaignStatus;
 use Google\ApiCore\ApiException;
 
@@ -25,7 +26,7 @@ class ListingCampaignTask
                 . ' campaign.name, campaign.status,campaign.start_date, campaign.end_date, '
                 . ' metrics.impressions, metrics.clicks, metrics.ctr, metrics.average_cpc, metrics.cost_micros, '
                 . ' campaign_budget.amount_micros'
-                . ' FROM campaign ORDER BY campaign.id desc';
+                . ' FROM campaign WHERE campaign.status != '.CampaignStatus::name(CampaignStatus::REMOVED). ' ORDER BY campaign.id desc';
 
             $stream = $googleAdsServiceClient
                 ->search($customerId, $query)->getPage();

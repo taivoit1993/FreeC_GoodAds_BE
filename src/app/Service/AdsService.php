@@ -70,7 +70,7 @@ class AdsService
         try{
             $googleAdsServiceClient = $googleAdsClient->getGoogleAdsServiceClient();
             $query = 'SELECT ad_group.id,'
-                .' ad_group_ad.ad.id, ad_group_ad.ad.name,'
+                .' ad_group_ad.ad.id, '
                 .' ad_group_ad.ad.responsive_search_ad.descriptions,'
                 .' ad_group_ad.ad.responsive_search_ad.headlines,'
                 .' ad_group_ad.ad.responsive_search_ad.path1,'

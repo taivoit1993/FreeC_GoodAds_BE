@@ -17,7 +17,9 @@ class ListingAdGroupTask
         try {
             $googleAdsServiceClient = $googleAdsClient->getGoogleAdsServiceClient();
             $query = 'SELECT campaign.id, ad_group.id, ad_group.name,'
-                .' ad_group.cpc_bid_micros, ad_group.status FROM ad_group';
+                .' ad_group.cpc_bid_micros, ad_group.status FROM ad_group '
+            .' WHERE ad_group.status != '. AdGroupStatus::name(AdGroupStatus::REMOVED)
+            .' ORDER BY ad_group.id desc';
             if ($campaignId !== null) {
                 $query .= " WHERE campaign.id = $campaignId";
             }
