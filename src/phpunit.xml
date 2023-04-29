@@ -27,5 +27,11 @@
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
+        <env name="GOOGLE_CLIENT_ID" value="968912013359-k3dlkhtuml6thouv2clttujfnt15ie45.apps.googleusercontent.com"/>
+        <env name="GOOGLE_CLIENT_SECRET" value="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"/>
+        <env name="GOOGLE_REDIRECT_URL" value="http://localhost:3000/login"/>
+        <env name="DEVELOP_TOKEN" value="-2SU77PyP4gk0kuAjZxxBQ"/>
+        <env name="LOGIN_CUSTOMER_ID" value="7049183756"/>
+        <env name="ACCOUNT_ID" value="9513370025"/>
     </php>
 </phpunit>
