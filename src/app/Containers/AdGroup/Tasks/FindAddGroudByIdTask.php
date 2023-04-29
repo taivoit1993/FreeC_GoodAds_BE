@@ -1,13 +1,13 @@
 <?php
 namespace App\Containers\AdGroup\Tasks;
+use App\Http\Core\AbstractTasks;
 use App\Trait\ResponseTrait;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsClient;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsException;
 use Google\Ads\GoogleAds\V13\Enums\AdGroupStatusEnum\AdGroupStatus;
 
-class FindAddGroudByIdTask
+class FindAddGroudByIdTask extends AbstractTasks
 {
-    use ResponseTrait;
 
     public function run(GoogleAdsClient $googleAdsClient,
                         int             $customerId,

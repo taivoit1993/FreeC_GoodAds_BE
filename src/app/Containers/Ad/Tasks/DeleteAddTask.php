@@ -1,15 +1,14 @@
 <?php
 namespace App\Containers\Ad\Tasks;
 
-use App\Trait\GoogleAdTrait;
-use App\Trait\ResponseTrait;
+use App\Http\Core\AbstractTasks;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsClient;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsException;
 use Google\Ads\GoogleAds\Util\V13\ResourceNames;
 use Google\Ads\GoogleAds\V13\Services\AdGroupAdOperation;
 
-class DeleteAddTask{
-    use GoogleAdTrait, ResponseTrait;
+class DeleteAddTask extends AbstractTasks
+{
     public function run( GoogleAdsClient $googleAdsClient,
                          int $customerId,
                          int $adGroupId,

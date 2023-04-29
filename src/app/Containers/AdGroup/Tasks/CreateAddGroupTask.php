@@ -1,15 +1,16 @@
 <?php
 namespace App\Containers\AdGroup\Tasks;
 
+use App\Http\Core\AbstractTasks;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsClient;
+use Google\Ads\GoogleAds\Lib\V13\GoogleAdsException;
 use Google\Ads\GoogleAds\Util\V13\ResourceNames;
 use Google\Ads\GoogleAds\V13\Enums\AdGroupStatusEnum\AdGroupStatus;
 use Google\Ads\GoogleAds\V13\Enums\AdGroupTypeEnum\AdGroupType;
 use Google\Ads\GoogleAds\V13\Resources\AdGroup;
 use Google\Ads\GoogleAds\V13\Services\AdGroupOperation;
-use Google\ApiCore\ApiException;
 
-class CreateAddGroupTask
+class CreateAddGroupTask extends AbstractTasks
 {
     /**
      * @param GoogleAdsClient $googleAdsClient
@@ -51,8 +52,8 @@ class CreateAddGroupTask
             );
 
             return $response->getResults()[0]->getResourceName();
-        } catch (ApiException $apiException) {
-            throw new \Exception($apiException->getMessage());
+        } catch (GoogleAdsException $googleAdsException) {
+            $this->responseAdsError($googleAdsException);
         }
     }
 }

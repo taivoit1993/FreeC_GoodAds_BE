@@ -2,16 +2,15 @@
 
 namespace App\Containers\Ad\Tasks;
 
+use App\Http\Core\AbstractTasks;
 use App\Trait\GoogleAdTrait;
 use App\Trait\ResponseTrait;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsClient;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsException;
 use Google\Ads\GoogleAds\V13\Enums\AdGroupAdStatusEnum\AdGroupAdStatus;
 
-class ListingAdTask
+class ListingAdTask extends AbstractTasks
 {
-    use GoogleAdTrait, ResponseTrait;
-
     public function run(GoogleAdsClient $googleAdsClient,
                         int             $customerId)
     {
@@ -24,7 +23,8 @@ class ListingAdTask
                 . ' ad_group_ad.ad.responsive_search_ad.path1,'
                 . ' ad_group_ad.ad.responsive_search_ad.path2,'
                 . ' ad_group_ad.ad.final_urls'
-                . ' FROM ad_group_ad ORDER BY ad_group_ad.ad.id desc';
+                . ' FROM ad_group_ad WHERE ad_group_ad.status != '.AdGroupAdStatus::name(AdGroupAdStatus::REMOVED)
+                .' ORDER BY ad_group_ad.ad.id desc';
 
             // Issues a search request
             $response =

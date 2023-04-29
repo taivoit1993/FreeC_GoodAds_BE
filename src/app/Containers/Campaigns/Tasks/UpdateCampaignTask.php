@@ -2,6 +2,7 @@
 
 namespace App\Containers\Campaigns\Tasks;
 
+use App\Http\Core\AbstractTasks;
 use App\Trait\ResponseTrait;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsClient;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsException;
@@ -10,7 +11,7 @@ use Google\Ads\GoogleAds\Util\V13\ResourceNames;
 use Google\Ads\GoogleAds\V13\Resources\Campaign;
 use Google\Ads\GoogleAds\V13\Services\CampaignOperation;
 
-class UpdateCampaignTask
+class UpdateCampaignTask extends AbstractTasks
 {
     use ResponseTrait;
     public function run(GoogleAdsClient $googleAdsClient,

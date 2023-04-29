@@ -2,7 +2,8 @@
 
 namespace App\Containers\Campaigns\Tasks;
 
-use App\Service\BudgetService;
+use App\Http\Core\AbstractTasks;
+use App\Trait\ResponseTrait;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsClient;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsException;
 use Google\Ads\GoogleAds\V13\Common\ManualCpc;
@@ -12,8 +13,9 @@ use Google\Ads\GoogleAds\V13\Resources\Campaign;
 use Google\Ads\GoogleAds\V13\Resources\Campaign\NetworkSettings;
 use Google\Ads\GoogleAds\V13\Services\CampaignOperation;
 
-class CreateCampaignTask
+class CreateCampaignTask extends AbstractTasks
 {
+    use ResponseTrait;
     /**
      * @param GoogleAdsClient $googleAdsClient
      * @param int $customerId
@@ -30,7 +32,7 @@ class CreateCampaignTask
                         int             $customerId,
                         int             $amountMicros,
                         string          $campaignName,
-                        string          $status,
+                                        $status,
                         string          $startDate,
                         string          $endDate,
     )
@@ -65,7 +67,7 @@ class CreateCampaignTask
             $addedCampaign = $response->getResults()[0];
             return $addedCampaign->getResourceName();
         } catch (GoogleAdsException $googleAdsException) {
-            throw new \Exception($googleAdsException->getMessage());
+            $this->responseAdsError($googleAdsException);
         }
     }
 }

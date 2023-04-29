@@ -2,19 +2,17 @@
 
 namespace App\Containers\AdGroup\Tasks;
 
-use App\Trait\ResponseTrait;
+use App\Http\Core\AbstractTasks;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsClient;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsException;
 use Google\Ads\GoogleAds\Util\V13\ResourceNames;
 use Google\Ads\GoogleAds\V13\Services\AdGroupOperation;
-use Google\Exception;
 
 /**
  *
  */
-class DeleteAddGroupTask
+class DeleteAddGroupTask extends AbstractTasks
 {
-    use ResponseTrait;
     /**
      * @param GoogleAdsClient $googleAdsClient
      * @param int $customerId

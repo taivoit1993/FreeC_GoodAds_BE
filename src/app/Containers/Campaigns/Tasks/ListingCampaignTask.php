@@ -2,14 +2,17 @@
 
 namespace App\Containers\Campaigns\Tasks;
 
+use App\Http\Core\AbstractTasks;
+use App\Trait\ResponseTrait;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsClient;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsException;
 use Google\Ads\GoogleAds\V13\Enums\CampaignStatusEnum;
 use Google\Ads\GoogleAds\V13\Enums\CampaignStatusEnum\CampaignStatus;
 use Google\ApiCore\ApiException;
 
-class ListingCampaignTask
+class ListingCampaignTask extends AbstractTasks
 {
+    use ResponseTrait;
     /**
      * @param GoogleAdsClient $googleAdsClient
      * @param int $customerId
@@ -48,7 +51,7 @@ class ListingCampaignTask
             }
             return $ads;
         } catch (GoogleAdsException $googleAdsException) {
-            throw new \Exception($googleAdsException->getMessage());
+            $this->responseAdsError($googleAdsException);
         }
     }
 }

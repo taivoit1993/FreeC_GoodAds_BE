@@ -1,6 +1,6 @@
 <?php
 namespace App\Containers\Campaigns\Tasks;
-use App\Trait\ResponseTrait;
+use App\Http\Core\AbstractTasks;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsClient;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsException;
 use Google\Ads\GoogleAds\Util\V13\ResourceNames;
@@ -8,9 +8,7 @@ use Google\Ads\GoogleAds\V13\Resources\Campaign;
 use Google\Ads\GoogleAds\V13\Services\CampaignOperation;
 
 
-class DeleteCampaignTask{
-    use ResponseTrait;
-
+class DeleteCampaignTask extends AbstractTasks {
     /**
      * @param GoogleAdsClient $googleAdsClient
      * @param int $customerId
@@ -37,8 +35,7 @@ class DeleteCampaignTask{
             $removedCampaign = $response->getResults()[0];
             return $removedCampaign->getResourceName();
         } catch (GoogleAdsException $googleAdsException) {
-            dd(1);
-            $this->responseErrorGoogleAds($googleAdsException);
+            $this->responseAdsError($googleAdsException);
         }
     }
 }

@@ -2,12 +2,12 @@
 
 namespace App\Containers\AdGroup\Tasks;
 
-use App\Trait\GoogleAdTrait;
+use App\Http\Core\AbstractTasks;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsClient;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsException;
 use Google\Ads\GoogleAds\V13\Enums\AdGroupStatusEnum\AdGroupStatus;
 
-class ListingAdGroupTask
+class ListingAdGroupTask extends AbstractTasks
 {
 
     public function run(GoogleAdsClient $googleAdsClient,
@@ -39,7 +39,7 @@ class ListingAdGroupTask
             }
             return $data;
         } catch (GoogleAdsException $googleAdsException) {
-            throw new \Exception($googleAdsException->getMessage());
+            $this->responseAdsError($googleAdsException);
         }
     }
 }

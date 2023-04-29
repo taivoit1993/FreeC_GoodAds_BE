@@ -2,6 +2,7 @@
 
 namespace App\Containers\Ad\Tasks;
 
+use App\Http\Core\AbstractTasks;
 use App\Trait\GoogleAdTrait;
 use App\Trait\ResponseTrait;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsClient;
@@ -14,10 +15,8 @@ use Google\Ads\GoogleAds\V13\Enums\ServedAssetFieldTypeEnum\ServedAssetFieldType
 use Google\Ads\GoogleAds\V13\Resources\Ad;
 use Google\Ads\GoogleAds\V13\Services\AdOperation;
 
-class UpdateAdTask
+class UpdateAdTask extends AbstractTasks
 {
-    use GoogleAdTrait, ResponseTrait;
-
     public function run(GoogleAdsClient $googleAdsClient,
                         int             $customerId,
                         int             $adId,

@@ -2,14 +2,14 @@
 
 namespace App\Containers\Campaigns\Tasks;
 
+use App\Http\Core\AbstractTasks;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsClient;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsException;
 use Google\Ads\GoogleAds\V13\Enums\BudgetDeliveryMethodEnum\BudgetDeliveryMethod;
 use Google\Ads\GoogleAds\V13\Resources\CampaignBudget;
 use Google\Ads\GoogleAds\V13\Services\CampaignBudgetOperation;
-use Google\ApiCore\ApiException;
 
-class CreateBudgetTask
+class CreateBudgetTask extends AbstractTasks
 {
     /**
      * @param GoogleAdsClient $googleAdsClient
@@ -42,8 +42,7 @@ class CreateBudgetTask
 
             return $addedBudget->getResourceName();
         } catch (GoogleAdsException $googleAdsException) {
-        } catch (ApiException $apiException) {
-            throw new \Exception($apiException->getMessage());
+            $this->responseAdsError($googleAdsException);
         }
     }
 }

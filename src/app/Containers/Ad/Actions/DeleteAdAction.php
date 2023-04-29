@@ -3,8 +3,9 @@
 namespace App\Containers\Ad\Actions;
 
 use App\Containers\Ad\Tasks\DeleteAddTask;
+use App\Http\Core\AbstractActions;
 
-class DeleteAdAction
+class DeleteAdAction extends AbstractActions
 {
     public function run($request, $id)
     {

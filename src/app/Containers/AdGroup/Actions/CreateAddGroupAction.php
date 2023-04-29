@@ -4,9 +4,10 @@ namespace App\Containers\AdGroup\Actions;
 
 use App\Containers\AdGroup\Tasks\CreateAddGroupTask;
 
+use App\Http\Core\AbstractActions;
 use Illuminate\Http\Request;
 
-class CreateAddGroupAction
+class CreateAddGroupAction extends AbstractActions
 {
     public function run(Request $request)
     {

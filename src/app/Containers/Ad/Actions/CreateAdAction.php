@@ -3,10 +3,11 @@
 namespace App\Containers\Ad\Actions;
 
 use App\Containers\Ad\Tasks\CreateAdTask;
+use App\Http\Core\AbstractActions;
 use Google\Ads\GoogleAds\V13\Enums\AdGroupStatusEnum\AdGroupStatus;
 
 
-class CreateAdAction
+class CreateAdAction extends AbstractActions
 {
     public function run($request)
     {

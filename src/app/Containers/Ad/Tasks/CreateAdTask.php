@@ -2,22 +2,18 @@
 
 namespace App\Containers\Ad\Tasks;
 
-use App\Trait\GoogleAdTrait;
-use App\Trait\ResponseTrait;
+use App\Http\Core\AbstractTasks;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsClient;
 use Google\Ads\GoogleAds\Lib\V13\GoogleAdsException;
 use Google\Ads\GoogleAds\Util\V13\ResourceNames;
 use Google\Ads\GoogleAds\V13\Common\ResponsiveSearchAdInfo;
-use Google\Ads\GoogleAds\V13\Enums\AdGroupAdStatusEnum\AdGroupAdStatus;
 use Google\Ads\GoogleAds\V13\Enums\ServedAssetFieldTypeEnum\ServedAssetFieldType;
 use Google\Ads\GoogleAds\V13\Resources\Ad;
 use Google\Ads\GoogleAds\V13\Resources\AdGroupAd;
 use Google\Ads\GoogleAds\V13\Services\AdGroupAdOperation;
 
-class CreateAdTask
+class CreateAdTask extends AbstractTasks
 {
-    use GoogleAdTrait, ResponseTrait;
-
     public function run(GoogleAdsClient $googleAdsClient,
                         int             $customerId,
                         int             $adGroupId,

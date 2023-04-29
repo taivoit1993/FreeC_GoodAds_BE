@@ -2,14 +2,12 @@
 
 namespace App\Containers\Campaigns\Actions;
 
-use App\Containers\Campaigns\Tasks\FindCampaignByIdTask;
 use App\Containers\Campaigns\Tasks\UpdateCampaignTask;
-use Carbon\Carbon;
-use Exception;
+use App\Http\Core\AbstractActions;
 use Google\Ads\GoogleAds\V12\Enums\CampaignStatusEnum\CampaignStatus;
 use Illuminate\Http\Request;
 
-class UpdateCampaignAction
+class UpdateCampaignAction extends AbstractActions
 {
     public function run(Request $request, $id)
     {

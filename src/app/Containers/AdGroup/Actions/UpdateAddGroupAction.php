@@ -3,10 +3,11 @@
 namespace App\Containers\AdGroup\Actions;
 
 use App\Containers\AdGroup\Tasks\UpdateAddGroupTask;
+use App\Http\Core\AbstractActions;
 use Google\Ads\GoogleAds\V13\Enums\AdGroupStatusEnum\AdGroupStatus;
 
 
-class UpdateAddGroupAction
+class UpdateAddGroupAction extends AbstractActions
 {
     public function run($request, $id)
     {
